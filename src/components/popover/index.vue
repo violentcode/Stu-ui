@@ -1,7 +1,11 @@
 <template>
   <div class="stu-popover">
     <Transition>
-      <div ref="popperRef" v-show="showPopper" class="stu-popover__popper">
+      <div
+        ref="popperRef"
+        v-show="showPopper"
+        :class="`stu-popover__popper stu-popover__popper--${placement}`"
+      >
         <slot></slot>
       </div>
     </Transition>
@@ -22,7 +26,7 @@ interface IProps {
 const props = withDefaults(defineProps<IProps>(), {
   trigger: 'click',
   title: '',
-  placement: 'bottom'
+  placement: 'top'
 })
 
 const showPopper = ref<boolean>(false)
@@ -50,8 +54,37 @@ onMounted(() => {
   }
 })
 </script>
-<style scoped>
-.stu-popover__popper {
-  padding: 12px;
+<style scoped lang="less">
+.stu-popover {
+  position: relative;
+  &__popper {
+    position: absolute;
+    padding: 18px 12px;
+    border: 1px solid #f5f5f5;
+    border-radius: 5px;
+    &--top::after {
+      position: absolute;
+      content: '';
+      border-left: 6px solid #f5f5f5;
+      border-right: 6px solid #f5f5f5;
+      border-top: 6px solid #fff;
+
+      left: 50%;
+      bottom: -12px;
+      transform: translateX(-50%);
+    }
+    &--right::after {
+      position: absolute;
+      content: '';
+    }
+    &--bottom::after {
+      position: absolute;
+      content: '';
+    }
+    &--left::after {
+      position: absolute;
+      content: '';
+    }
+  }
 }
 </style>
