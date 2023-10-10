@@ -102,7 +102,6 @@ function compPopoverPosition(referenceEl: HTMLElement, popperEl: HTMLElement) {
   const popperWidth = popperEl.offsetWidth
   const popperHeight = popperEl.offsetHeight
   popperEl.style.display = 'none'
-  console.log(referenceLeft, referenceTop, referenceWidth, referenceHeight, popperWidth, popperHeight);
   switch (props.placement) {
     case 'top':
       popperLeft = referenceLeft - popperWidth / 2 + referenceWidth / 2
