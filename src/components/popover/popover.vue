@@ -1,8 +1,12 @@
 <template>
   <div class="stu-popover">
     <Transition name="stu-popover">
-      <div ref="popperRef" v-show="showPopper" :class="`stu-popover__popper stu-popover__popper--${placement}`">
-      <!-- 优先展示插槽进来的内容 / 如果没插槽再考虑props传递进来的title -->
+      <div
+        ref="popperRef"
+        v-show="showPopper"
+        :class="`stu-popover__popper stu-popover__popper--${placement}`"
+      >
+        <!-- 优先展示插槽进来的内容 / 如果没插槽再考虑props传递进来的title -->
         <template v-if="slots.default">
           <slot></slot>
         </template>
@@ -29,7 +33,6 @@ interface IProps {
   title: string
   placement: 'top' | 'bottom' | 'left' | 'right'
 }
-
 
 const props = withDefaults(defineProps<IProps>(), {
   trigger: 'click',
@@ -63,7 +66,7 @@ function bindListening(referenceEl: HTMLElement) {
         showPopper.value = !showPopper.value
         e.stopPropagation()
       })
-      document.addEventListener('click', e => {
+      document.addEventListener('click', (e) => {
         if (e.target !== popperRef.value) {
           showPopper.value = false
         }
@@ -90,7 +93,6 @@ function bindListening(referenceEl: HTMLElement) {
 
 // 计算popover的位置
 function compPopoverPosition(referenceEl: HTMLElement, popperEl: HTMLElement) {
-
   // 计算出触发者的位置
   const referenceLeft = referenceEl.offsetLeft
   const referenceTop = referenceEl.offsetTop
@@ -106,19 +108,19 @@ function compPopoverPosition(referenceEl: HTMLElement, popperEl: HTMLElement) {
     case 'top':
       popperLeft = referenceLeft - popperWidth / 2 + referenceWidth / 2
       popperTop = referenceTop - popperHeight - 12
-      break;
+      break
     case 'bottom':
       popperLeft = referenceLeft - popperWidth / 2 + referenceWidth / 2
       popperTop = referenceTop + referenceHeight + 12
-      break;
+      break
     case 'left':
       popperLeft = referenceLeft - popperWidth - 12
       popperTop = referenceTop - popperHeight / 2 + referenceHeight / 2
-      break;
+      break
     case 'right':
       popperLeft = referenceLeft + referenceWidth + 12
       popperTop = referenceTop - popperHeight / 2 + referenceHeight / 2
-      break;
+      break
   }
 }
 
@@ -130,8 +132,6 @@ watch(showPopper, (newVal) => {
     popperEl.style.top = popperTop + 'px'
   }
 })
-
-
 </script>
 <style scoped lang="less">
 .stu-popover {
@@ -144,11 +144,11 @@ watch(showPopper, (newVal) => {
     min-width: 150px;
     border: 1px solid #ebeef5;
     border-radius: 4px;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     font-size: 14px;
     color: rgb(96, 98, 102);
     line-height: 19.6px;
-
+    background-color: #fff;
     &::after {
       position: absolute;
       content: '';
