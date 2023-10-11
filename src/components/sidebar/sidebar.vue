@@ -1,12 +1,18 @@
 <template>
   <div class="stu-sidebar">
     <div class="stu-sidebar__list">
-      <template v-for="(item, index) in sidebars" :key="item ? item.title:  index">
-        <div :class="{
-          'stu-sidebar__item': true,
-          'stu-sidebar__item--select': index === currentIndex
-        }" @click="handleClickItem(index)">
-          {{ item ? item.title:  '' }}
+      <template
+        v-for="(item, index) in sidebars"
+        :key="item ? item.title : index"
+      >
+        <div
+          :class="{
+            'stu-sidebar__item': true,
+            'stu-sidebar__item--select': index === currentIndex
+          }"
+          @click="handleClickItem(index)"
+        >
+          {{ item ? item.title : '' }}
         </div>
       </template>
     </div>
@@ -16,22 +22,14 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { type ISideBarProps, type ISideBarSlots, sideBarProps } from './sidebar'
 import { onMounted, ref } from 'vue'
 
-interface IProps {
-  modelValue: number | string
-}
-const props = withDefaults(defineProps<IProps>(), {
-  modelValue: 0
-})
+const props = withDefaults(defineProps<ISideBarProps>(), sideBarProps)
 
-const emit = defineEmits<{
-  'update:modelValue': [modelValue: number | string]
-}>()
+const emit = defineEmits(['update:modelValue'])
 
-const slots = defineSlots<{
-  default(): any
-}>()
+const slots = defineSlots<ISideBarSlots>()
 
 // 获取默认插槽里面真实的内容，通过for循环遍历有可能存在fragment
 let childrenSlot: any[] = []
@@ -39,7 +37,7 @@ function getDefaultSlot(slots: any) {
   for (const item of slots) {
     if (item.type === Symbol.for('v-fgt')) {
       getDefaultSlot(item.children)
-    }else {
+    } else {
       childrenSlot.push(item)
     }
   }

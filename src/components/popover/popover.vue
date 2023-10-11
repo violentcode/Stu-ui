@@ -1,7 +1,11 @@
 <template>
   <div class="stu-popover">
     <Transition name="stu-popover">
-      <div ref="popperRef" v-show="modelValue" :class="`stu-popover__popper stu-popover__popper--${placement}`">
+      <div
+        ref="popperRef"
+        v-show="trigger === 'manual' ? modelValue : showPopper"
+        :class="`stu-popover__popper stu-popover__popper--${placement}`"
+      >
         <!-- 优先展示插槽进来的内容 / 如果没插槽再考虑props传递进来的title -->
         <template v-if="slots.default">
           <slot></slot>
@@ -17,32 +21,12 @@
   </div>
 </template>
 <script setup lang="ts">
+import { type IPopoverProps, type IPopoverSlots, popoverProps } from './popover'
 import { onMounted, ref, watch } from 'vue'
 
-const slots = defineSlots<{
-  default: any
-  reference: any
-}>()
+const slots = defineSlots<IPopoverSlots>()
 
-interface IProps {
-  trigger: 'click' | 'focus' | 'hover'
-  title: string
-  placement: 'top' | 'bottom' | 'left' | 'right'
-  modelValue?: boolean 
-}
-
-
-// const isAbsent = Symbol('modelValue')
-const props = withDefaults(defineProps<IProps>(), {
-  trigger: 'click',
-  title: '',
-  placement: 'top',
-})
-
-
-const emit = defineEmits<{
-  'update:modelValue': any
-}>()
+const props = withDefaults(defineProps<IPopoverProps>(), popoverProps)
 
 const showPopper = ref<boolean>(false)
 
@@ -68,35 +52,29 @@ function bindListening(referenceEl: HTMLElement) {
     case 'click':
       referenceEl.addEventListener('click', (e) => {
         showPopper.value = !showPopper.value
-        emit('update:modelValue', !props.modelValue)
         e.stopPropagation()
       })
       document.addEventListener('click', (e) => {
         if (!showPopper.value) return
         if (!popperRef.value?.contains(e.target as Node)) {
           showPopper.value = false
-          emit('update:modelValue', false)
         }
       })
       break
     case 'hover':
       referenceEl.addEventListener('mouseenter', () => {
         showPopper.value = true
-        emit('update:modelValue', true)
       })
       referenceEl.addEventListener('mouseleave', () => {
         showPopper.value = false
-        emit('update:modelValue', false)
       })
       break
     case 'focus':
       referenceEl.addEventListener('mousedown', () => {
         showPopper.value = true
-        emit('update:modelValue', true)
       })
       referenceEl.addEventListener('mouseup', () => {
         showPopper.value = false
-        emit('update:modelValue', false)
       })
       break
   }
@@ -136,7 +114,7 @@ function compPopoverPosition(referenceEl: HTMLElement, popperEl: HTMLElement) {
 }
 
 // 当popper显示时，就设置位置
-watch(() => props.modelValue, (newVal) => {
+watch(showPopper, (newVal) => {
   if (newVal) {
     const popperEl = popperRef.value as HTMLElement
     popperEl.style.left = popperLeft + 'px'
@@ -144,6 +122,16 @@ watch(() => props.modelValue, (newVal) => {
   }
 })
 
+watch(
+  () => props.modelValue,
+  (newVal) => {
+    if (newVal) {
+      const popperEl = popperRef.value as HTMLElement
+      popperEl.style.left = popperLeft + 'px'
+      popperEl.style.top = popperTop + 'px'
+    }
+  }
+)
 </script>
 <style scoped lang="less">
 .stu-popover {

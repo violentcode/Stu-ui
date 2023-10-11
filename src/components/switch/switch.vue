@@ -20,19 +20,10 @@
   </div>
 </template>
 <script setup lang="ts">
+import { type ISwitchProps, switchProps } from './switch'
 import { ref } from 'vue'
 
-interface IProps {
-  size: string | number
-  activeColor: string
-  inactiveColor: string
-}
-
-withDefaults(defineProps<IProps>(), {
-  size: '26px',
-  activeColor: '#1989fa',
-  inactiveColor: 'rgba(120, 120, 128, 0.16)'
-})
+withDefaults(defineProps<ISwitchProps>(), switchProps)
 
 const currentCheck = ref(false)
 const handleChangeSwitch = () => {

@@ -6,15 +6,9 @@
   </div>
 </template>
 <script lang="ts" setup>
-interface IProps {
-  type: 'primary' | 'success' | 'warning' | 'danger' | 'default'
-  size: 'large' | 'small' | 'mini' | 'normal'
-}
+import { buttonProps, type IButtonProps } from './button'
 
-withDefaults(defineProps<IProps>(), {
-  type: 'default',
-  size: 'normal'
-})
+withDefaults(defineProps<IButtonProps>(), buttonProps)
 </script>
 <style scoped lang="less">
 .stu-button {
