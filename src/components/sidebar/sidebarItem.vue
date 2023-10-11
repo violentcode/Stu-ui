@@ -5,8 +5,8 @@
 </template>
 <script  lang="ts" setup>
 interface IProps {
-    title: string
-    to: string
+    title?: string
+    to?: string
 }
 withDefaults(defineProps<IProps>(), {
     title: '',

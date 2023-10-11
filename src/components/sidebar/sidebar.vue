@@ -1,15 +1,12 @@
 <template>
   <div class="stu-sidebar">
     <div class="stu-sidebar__list">
-      <template v-for="(item, index) in sidebars" :key="item.title">
-        <div
-          :class="{
-            'stu-sidebar__item': true,
-            'stu-sidebar__item--select': index === currentIndex
-          }"
-          @click="handleClickItem(index)"
-        >
-          {{ item.title }}
+      <template v-for="(item, index) in sidebars" :key="item ? item.title:  index">
+        <div :class="{
+          'stu-sidebar__item': true,
+          'stu-sidebar__item--select': index === currentIndex
+        }" @click="handleClickItem(index)">
+          {{ item ? item.title:  '' }}
         </div>
       </template>
     </div>
@@ -36,13 +33,26 @@ const slots = defineSlots<{
   default(): any
 }>()
 
+// 获取默认插槽里面真实的内容，通过for循环遍历有可能存在fragment
+let childrenSlot: any[] = []
+function getDefaultSlot(slots: any) {
+  for (const item of slots) {
+    if (item.type === Symbol.for('v-fgt')) {
+      getDefaultSlot(item.children)
+    }else {
+      childrenSlot.push(item)
+    }
+  }
+}
+getDefaultSlot(slots.default())
+
 interface ISidebars {
   title: string
   to: string
 }
 const sidebars = ref<ISidebars[]>()
 onMounted(() => {
-  sidebars.value = slots.default().map((item: any) => item.props)
+  sidebars.value = childrenSlot.map((item: any) => item.props)
 })
 
 const currentIndex = ref<number>(+props.modelValue)
@@ -52,7 +62,7 @@ function handleClickItem(index: number) {
 }
 
 const renderContent = () => {
-  return slots.default()[currentIndex.value]
+  return childrenSlot[currentIndex.value]
 }
 </script>
 <style scoped lang="less">
