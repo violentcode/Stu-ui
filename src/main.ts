@@ -1,10 +1,10 @@
-import stuSwitch from './components/switch/switch.vue'
-import stuPopover from './components/popover/popover.vue'
-import stuButton from './components/button/button.vue'
-import stuRow from './components/layout/row.vue'
-import stuCol from './components/layout/col.vue'
-import stuSidebar from './components/sidebar/sidebar.vue'
-import stuSidebarItem from './components/sidebarItem/sidebarItem.vue'
+import stuSwitch from './packages/switch/switch.vue'
+import stuPopover from './packages/popover/popover.vue'
+import stuButton from './packages/button/button.vue'
+import stuRow from './packages/layout/row.vue'
+import stuCol from './packages/layout/col.vue'
+import stuSidebar from './packages/sidebar/sidebar.vue'
+import stuSidebarItem from './packages/sidebarItem/sidebarItem.vue'
 
 export {
   stuSwitch,
