@@ -47,7 +47,6 @@ getDefaultSlot(slots.default())
 const sidebars = ref<ISideBarItemProps[]>()
 onMounted(() => {
   sidebars.value = childrenSlot.map((item: any) => item.props)
-  console.log(sidebars);
 })
 
 function handleClickItem(index: number) {
