@@ -17,7 +17,7 @@
 </template>
 <script lang="ts" setup>
 import { type ISideBarProps, type ISideBarSlots, sideBarProps } from './sidebar'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 
 const props = withDefaults(defineProps<ISideBarProps>(), sideBarProps)
 
@@ -48,7 +48,6 @@ interface ISidebars {
 const sidebars = ref<ISidebars[]>()
 onMounted(() => {
   sidebars.value = childrenSlot.map((item: any) => item.props)
-  console.log(childrenSlot);
 
 })
 
@@ -56,10 +55,18 @@ function handleClickItem(index: number) {
   emit('update:modelValue', index)
 }
 
-const renderContent = () => {
+const renderContent = ref<any>(() => {
+  return childrenSlot[0]
+})
 
-  return childrenSlot[props.modelValue as number]
-}
+watch(() => props.modelValue, (newVal: any) => {
+  renderContent.value = () => {
+    return childrenSlot[newVal]
+  }
+})
+
+
+
 </script>
 <style scoped lang="less">
 .stu-sidebar {
