@@ -1,4 +1,4 @@
-<template>
+<template :key="title">
   <div class="stu-sidebar-item">
     <slot></slot>
   </div>

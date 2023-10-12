@@ -1,17 +1,11 @@
 <template>
   <div class="stu-sidebar">
     <div class="stu-sidebar__list">
-      <template
-        v-for="(item, index) in sidebars"
-        :key="item ? item.title : index"
-      >
-        <div
-          :class="{
-            'stu-sidebar__item': true,
-            'stu-sidebar__item--select': index === currentIndex
-          }"
-          @click="handleClickItem(index)"
-        >
+      <template v-for="(item, index) in sidebars" :key="item ? item.title : index">
+        <div :class="{
+          'stu-sidebar__item': true,
+          'stu-sidebar__item--select': index === modelValue
+        }" @click="handleClickItem(index)">
           {{ item ? item.title : '' }}
         </div>
       </template>
@@ -38,7 +32,10 @@ function getDefaultSlot(slots: any) {
     if (item.type === Symbol.for('v-fgt')) {
       getDefaultSlot(item.children)
     } else {
-      childrenSlot.push(item)
+      // 不push注释
+      if (item.type !== Symbol.for('v-cmt')) {
+        childrenSlot.push(item)
+      }
     }
   }
 }
@@ -51,16 +48,17 @@ interface ISidebars {
 const sidebars = ref<ISidebars[]>()
 onMounted(() => {
   sidebars.value = childrenSlot.map((item: any) => item.props)
+  console.log(childrenSlot);
+
 })
 
-const currentIndex = ref<number>(+props.modelValue)
 function handleClickItem(index: number) {
-  currentIndex.value = index
   emit('update:modelValue', index)
 }
 
 const renderContent = () => {
-  return childrenSlot[currentIndex.value]
+
+  return childrenSlot[props.modelValue as number]
 }
 </script>
 <style scoped lang="less">
