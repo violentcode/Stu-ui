@@ -4,8 +4,9 @@
       <template v-for="(item, index) in sidebars" :key="item ? item.title : index">
         <div :class="{
           'stu-sidebar__item': true,
-          'stu-sidebar__item--select': index === modelValue
-        }" @click="handleClickItem(index)">
+          'stu-sidebar__item--select': index === modelValue,
+          'stu-sidebar__item--disabled': isDisabled(item.disabled as (string | boolean)) // 只传递disabled实际传递的是disabled = ''
+        }" @click="() => isDisabled(item.disabled as (string | boolean)) ? '': handleClickItem(index)">
           {{ item ? item.title : '' }}
         </div>
       </template>
@@ -17,6 +18,7 @@
 </template>
 <script lang="ts" setup>
 import { type ISideBarProps, type ISideBarSlots, sideBarProps } from './sidebar'
+import { type ISideBarItemProps } from "../sidebarItem/sidebarItem"
 import { onMounted, ref, watch } from 'vue'
 
 const props = withDefaults(defineProps<ISideBarProps>(), sideBarProps)
@@ -41,14 +43,11 @@ function getDefaultSlot(slots: any) {
 }
 getDefaultSlot(slots.default())
 
-interface ISidebars {
-  title: string
-  to: string
-}
-const sidebars = ref<ISidebars[]>()
+
+const sidebars = ref<ISideBarItemProps[]>()
 onMounted(() => {
   sidebars.value = childrenSlot.map((item: any) => item.props)
-
+  console.log(sidebars);
 })
 
 function handleClickItem(index: number) {
@@ -64,6 +63,12 @@ watch(() => props.modelValue, (newVal: any) => {
     return childrenSlot[newVal]
   }
 })
+
+// 判断是否是disabled
+function isDisabled(disabled: string | boolean) {
+  return disabled === true || disabled === ''
+}
+
 
 
 
@@ -102,7 +107,12 @@ watch(() => props.modelValue, (newVal: any) => {
       }
     }
 
-    &:not(.stu-sidebar-item--select):hover {
+    &--disabled {
+      color: #c8c9cc;
+      cursor: not-allowed;
+    }
+
+    &:not(.stu-sidebar__item--select, .stu-sidebar__item--disabled):hover {
       color: #1989fa;
     }
   }
