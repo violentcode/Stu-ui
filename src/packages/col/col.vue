@@ -1,5 +1,5 @@
 <template>
-    <component :is="tag" :class="`stu-col stu-col--${span} stu-col--offset-${offset} `">
+    <component :is="tag" :class="{ 'stu-col': true, [`stu-col--${span}`]: !!span, [`stu-col--offset-${offset}`]: !!offset }">
         <slot></slot>
     </component>
 </template>
@@ -7,10 +7,16 @@
 import { colProps, type IColProps } from "./col"
 withDefaults(defineProps<IColProps>(), colProps)
 
+
+
 </script>
 <style scoped lang="less">
+.stu-col {
+    box-sizing: border-box
+}
 .generate-col(24);
 
+// 递归生成类
 .generate-col(@n, @i: 1) when (@i =< @n) {
     .stu-col--@{i} {
         flex: 0 0 @i *(100% / 24);
