@@ -5,6 +5,7 @@ import stuRow from './packages/row/row.vue'
 import stuCol from './packages/col/col.vue'
 import stuSidebar from './packages/sidebar/sidebar.vue'
 import stuSidebarItem from './packages/sidebarItem/sidebarItem.vue'
+import stuLoading from "./packages/loading/loading.vue"
 
 export {
   stuSwitch,
@@ -13,5 +14,6 @@ export {
   stuRow,
   stuCol,
   stuSidebar,
-  stuSidebarItem
+  stuSidebarItem,
+  stuLoading
 }
