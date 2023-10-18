@@ -6,9 +6,9 @@ import layout from './layout/index.vue'
 import loading from './loading/index.vue'
 
 export default [
-  { title: 'Loading 加载', demo: loading },
   { title: 'Button 按钮', demo: button },
   { title: 'Layout 布局', demo: layout },
+  { title: 'Loading 加载', demo: loading },
   { title: 'Switch 开关', demo: _switch },
   { title: 'Popover 弹出框', demo: popover },
   { title: 'Sidebar 侧边导航', demo: sidebar }
