@@ -4,7 +4,6 @@ import popover from './popover/index.vue'
 import sidebar from './sidebar/index.vue'
 import layout from './layout/index.vue'
 import loading from './loading/index.vue'
-import todoList from "./todoList/index.vue"
 
 export default [
   { title: 'Button 按钮', demo: button },
@@ -12,6 +11,5 @@ export default [
   { title: 'Loading 加载', demo: loading },
   { title: 'Switch 开关', demo: _switch },
   { title: 'Popover 弹出框', demo: popover },
-  { title: 'Sidebar 侧边导航', demo: sidebar },
-  { title: 'TodoList 待办清单', demo: todoList },
+  { title: 'Sidebar 侧边导航', demo: sidebar }
 ]
