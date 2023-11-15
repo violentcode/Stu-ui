@@ -6,7 +6,7 @@
     </div>
     <div class="title">自定义颜色</div>
     <div class="source">
-      <stu-loading color="rgb(25, 137, 250)"></stu-loading>
+      <stu-loading color="hotpink"></stu-loading>
     </div>
     <div class="title">自定义大小</div>
     <div class="source">

@@ -102,7 +102,7 @@ function isDisabled(disabled: string | boolean) {
         transform: translateY(-50%);
         width: 4px;
         height: 16px;
-        background-color: #1989fa;
+        background-color: var(--stu-primary-color);
       }
     }
 

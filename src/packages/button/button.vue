@@ -20,24 +20,24 @@ withDefaults(defineProps<IButtonProps>(), buttonProps)
   font-size: 14px;
   cursor: pointer;
   &--primary {
-    background-color: #1989fa;
-    border: 1px solid #1989fa;
+    background-color: var(--stu-primary-color);
+    border: 1px solid var(--stu-primary-color);
   }
   &--success {
-    background-color: #07c160;
-    border: 1px solid #07c160;
+    background-color: var(--stu-success-color);
+    border: 1px solid var(--stu-success-color);
   }
   &--warning {
-    background-color: #ff976a;
-    border: 1px solid #ff976a;
+    background-color: var(--stu-warning-color);
+    border: 1px solid var(--stu-warning-color);
   }
   &--danger {
-    background-color: #ee0a24;
-    border: 1px solid #ee0a24;
+    background-color:  var(--stu-danger-color);
+    border: 1px solid  var(--stu-danger-color);
   }
   &--default {
-    background-color: #fff;
-    color: black;
+    background-color: var(--stu-white);
+    color: var(--stu-black);
     border: 1px solid #f5f5f5;
   }
   &--large {

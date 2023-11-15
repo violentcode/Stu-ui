@@ -81,10 +81,10 @@ import { stuRow, stuCol } from '../../../dist/bundle.mjs'
 }
 
 :deep(.stu-col):nth-child(2n) {
-  background-color: #215e21;
+  background-color: pink;
 }
 
 :deep(.stu-col):nth-child(2n + 1) {
-  background-color: #238e23;
+  background-color: hotpink;
 }
 </style>

@@ -12,7 +12,7 @@
         'stu-switch__core--off': !currentCheck
       }"
       :style="{
-        backgroundColor: currentCheck ? activeColor : inactiveColor,
+        backgroundColor: currentCheck ? activeColor  : inactiveColor,
         transform: `scale(${+String(size).replace('px', ' ') / 26})`
       }"
       @click="handleChangeSwitch"
@@ -57,12 +57,15 @@ const handleChangeSwitch = () => {
       transition: left 0.5s ease;
     }
     &--on {
+      background-color: var(--stu-primary-color);
       &::after {
         left: calc(100% - 28px);
       }
     }
 
     &--off {
+      background-color: var(--stu-gray-5);
+
       &::after {
         left: 2px;
       }

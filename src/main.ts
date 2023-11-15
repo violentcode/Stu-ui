@@ -6,6 +6,9 @@ import stuCol from './packages/col/col.vue'
 import stuSidebar from './packages/sidebar/sidebar.vue'
 import stuSidebarItem from './packages/sidebarItem/sidebarItem.vue'
 import stuLoading from "./packages/loading/loading.vue"
+import stuTodoList from "./packages/todoList/todoList.vue"
+
+import "./assest/css/common.less"
 
 export {
   stuSwitch,
@@ -15,5 +18,6 @@ export {
   stuCol,
   stuSidebar,
   stuSidebarItem,
-  stuLoading
+  stuLoading,
+  stuTodoList
 }
