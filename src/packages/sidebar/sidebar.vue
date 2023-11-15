@@ -86,7 +86,7 @@ function isDisabled(disabled: string | boolean) {
     cursor: pointer;
 
     color: #323233;
-    font-size: 14px;
+    font-size: var(--stu-font-size-md);
     padding-left: 10px;
 
     &--select {

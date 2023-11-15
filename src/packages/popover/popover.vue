@@ -147,7 +147,7 @@ watch(
     border: 1px solid #ebeef5;
     border-radius: 4px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-    font-size: 14px;
+    font-size: var(--stu-font-size-md);
     color: rgb(96, 98, 102);
     line-height: 19.6px;
     background-color: #fff;

@@ -44,7 +44,7 @@ withDefaults(defineProps<ILoadingProps>(), loadingProps)
         height: 100%;
 
         circle {
-            animation: van-circular 1.5s ease-in-out infinite;
+            animation: stu-circular 1.5s ease-in-out infinite;
             stroke: currentColor;
             stroke-width: 3;
             stroke-linecap: round;
@@ -54,7 +54,7 @@ withDefaults(defineProps<ILoadingProps>(), loadingProps)
 
 
 
-@keyframes van-circular {
+@keyframes stu-circular {
     0% {
         stroke-dasharray: 1, 200;
         stroke-dashoffset: 0;

@@ -17,7 +17,7 @@ withDefaults(defineProps<IButtonProps>(), buttonProps)
   padding: 0;
   border-radius: 5px;
   color: #fff;
-  font-size: 14px;
+  font-size: var(--stu-font-size-md);
   cursor: pointer;
   &--primary {
     background-color: var(--stu-primary-color);
@@ -43,17 +43,17 @@ withDefaults(defineProps<IButtonProps>(), buttonProps)
   &--large {
     width: 328px;
     height: 50px;
-    font-size: 16px;
+    font-size: var(--stu-font-size-lg);
   }
   &--small {
     width: 66px;
     height: 32px;
-    font-size: 12px;
+    font-size: var(--stu-font-size-sm);
   }
   &--mini {
     width: 58px;
     height: 24px;
-    font-size: 12px;
+    font-size: var(--stu-font-size-xs);
   }
   &--normal {
     width: 88px;
